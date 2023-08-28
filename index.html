@@ -3,14 +3,41 @@
     <head>
         <title>My Note</title>
         <link rel="stylesheet" href="style.css">
+        <script>
+            function getNote(){
+                if (localStorage.getItem('note')){
+                    var note=localStorage.getItem('note');
+                }
+                else{
+                    var note='Make and edit a note';
+                }
+                document.getElementById('note').innerHTML=note;
+            }
+            function saveNote(id){
+                var note=document.getElementById('note').innerHTML;
+                localStorage.setItem('note',note);
+            }
+            function clearNote(){
+                clear: localStorage.clear();
+                return false;
+            }
+        </script>
     </head>
     <body>
-        <heading>
+        <header>
             <h1>My Note</h1>
-        </heading>
+        </header>
         <section id="container">
-            <div id="note" contenteditable="true"></div>
-
+            <div id="note" contenteditable="true" onkeyup="saveNote(this.id)"></div>
         </section>
+        <footer>
+            <div>
+                <a href="" onclick="javascript:clearNote();" class="clear">Clear Note</a>
+            </div>
+            <p>My Note &copy; 2023</p>
+        </footer>
+        <script>
+            getNote();
+        </script>
     </body>
 </html>
